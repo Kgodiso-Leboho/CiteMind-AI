@@ -23,7 +23,7 @@ export default function Login() {
     try {
       // Replace with your auth logic
       await new Promise((r) => setTimeout(r, 1200));
-      navigate("/chat");
+      navigate("/app");
     } catch (err) {
       setError("Invalid credentials. Please try again.");
     } finally {
@@ -54,7 +54,7 @@ export default function Login() {
               <BookOpen size={17} className="text-white" strokeWidth={2} />
             </div>
             <span className="font-serif text-xl font-semibold text-white tracking-tight">
-              Cite<span className="text-blue-400">AI</span>
+              CiteMind<span className="text-blue-400">AI</span>
             </span>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function Login() {
               <BookOpen size={15} className="text-white" strokeWidth={2} />
             </div>
             <span className="font-serif text-xl font-semibold text-gray-900">
-              Cite<span className="text-blue-600">AI</span>
+              CiteMind<span className="text-blue-600">AI</span>
             </span>
           </div>
 
