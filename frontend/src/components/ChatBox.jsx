@@ -1,6 +1,27 @@
 import { useState, useRef, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { ArrowUp, CheckCircle2, BookOpen } from 'lucide-react'
+import { ArrowUp, CheckCircle2, BookOpen, Search, Quote, GraduationCap } from 'lucide-react'
+
+const MODE_CONFIG = [
+  {
+    key: 'webSearch',
+    label: 'Web Search',
+    icon: Search,
+    tooltip: 'Search the live web for up-to-date sources',
+  },
+  {
+    key: 'citations',
+    label: 'Citations',
+    icon: Quote,
+    tooltip: 'Include structured citations with every response',
+  },
+  {
+    key: 'academicMode',
+    label: 'Academic Mode',
+    icon: GraduationCap,
+    tooltip: 'Use peer-reviewed sources and formal language',
+  },
+]
 
 const SUGGESTIONS = [
   { label: 'Biology', q: 'How does CRISPR-Cas9 gene editing work at a molecular level?' },
@@ -11,8 +32,18 @@ const SUGGESTIONS = [
 
 export default function ChatBox({ session, isLoading, onSend, messagesEndRef }) {
   const [input, setInput] = useState('')
+  const [modes, setModes] = useState({
+    webSearch: true,
+    citations: false,
+    academicMode: false,
+  })
+  const [tooltip, setTooltip] = useState(null)
   const textareaRef = useRef(null)
   const hasMessages = session.messages.length > 0
+
+  const toggleMode = (key) => {
+    setModes(prev => ({ ...prev, [key]: !prev[key] }))
+  }
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -24,7 +55,7 @@ export default function ChatBox({ session, isLoading, onSend, messagesEndRef }) 
 
   const handleSend = () => {
     if (!input.trim() || isLoading) return
-    onSend(input.trim())
+    onSend(input.trim(), modes)
     setInput('')
   }
 
@@ -43,17 +74,39 @@ export default function ChatBox({ session, isLoading, onSend, messagesEndRef }) 
           {session.title}
         </span>
         <div className="flex gap-2">
-          {['Web Search', 'Citations', 'Academic Mode'].map((pill, i) => (
-            <span
-              key={pill}
-              className={`px-2.5 py-1 rounded-full text-[11px] font-medium border transition-colors
-                ${i === 0
-                  ? 'bg-blue-50 text-blue-600 border-blue-200'
-                  : 'bg-gray-100 text-gray-500 border-gray-200'}`}
-            >
-              {pill}
-            </span>
-          ))}
+          {MODE_CONFIG.map(({ key, label, icon: Icon, tooltip: tip }) => {
+            const active = modes[key]
+            return (
+              <div key={key} className="relative">
+                <button
+                  onClick={() => toggleMode(key)}
+                  onMouseEnter={() => setTooltip(key)}
+                  onMouseLeave={() => setTooltip(null)}
+                  aria-pressed={active}
+                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px]
+                    font-medium border transition-all duration-150 cursor-pointer select-none
+                    active:scale-95
+                    ${active
+                      ? 'bg-blue-600 text-white border-blue-600 shadow-sm'
+                      : 'bg-gray-100 text-gray-500 border-gray-200 hover:bg-gray-200 hover:text-gray-700'
+                    }`}
+                >
+                  <Icon size={11} strokeWidth={2.5} />
+                  {label}
+                </button>
+
+                {/* Tooltip */}
+                {tooltip === key && (
+                  <div className="absolute top-full right-0 mt-2 z-50 pointer-events-none
+                                  whitespace-nowrap bg-gray-900 text-white text-[11px]
+                                  px-2.5 py-1.5 rounded-lg shadow-lg">
+                    {tip}
+                    <div className="absolute -top-1 right-3 w-2 h-2 bg-gray-900 rotate-45" />
+                  </div>
+                )}
+              </div>
+            )
+          })}
         </div>
       </header>
 
@@ -105,10 +158,24 @@ export default function ChatBox({ session, isLoading, onSend, messagesEndRef }) 
               />
             </button>
           </div>
-          <p className="text-[11px] text-gray-400 mt-2 pl-1 flex items-center gap-1.5">
-            <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0" />
-            Responses include citations and evidence assessment
-          </p>
+          <div className="flex items-center justify-between mt-2 pl-1">
+            <p className="text-[11px] text-gray-400 flex items-center gap-1.5">
+              <span className="w-1 h-1 rounded-full bg-gray-300 flex-shrink-0" />
+              Responses include citations and evidence assessment
+            </p>
+            <div className="flex items-center gap-1.5">
+              {MODE_CONFIG.filter(m => modes[m.key]).map(({ key, label, icon: Icon }) => (
+                <span
+                  key={key}
+                  className="flex items-center gap-1 text-[10px] text-blue-600
+                             bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-full"
+                >
+                  <Icon size={9} strokeWidth={2.5} />
+                  {label}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -125,7 +192,7 @@ function WelcomeScreen({ onSuggestion }) {
         What would you like to research?
       </h1>
       <p className="text-sm text-gray-500 leading-relaxed mb-8">
-        CiteAI delivers evidence-backed answers with structured citations. Ask any
+        CiteMindAI delivers evidence-backed answers with structured citations. Ask any
         research question and receive rigorous, verifiable responses.
       </p>
       <div className="grid grid-cols-2 gap-2.5 text-left">

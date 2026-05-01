@@ -72,7 +72,7 @@ export default function LandingPage() {
             Research that{' '}
             <span className="relative inline-block">
               <span className="relative z-10">proves itself</span>
-              <span className="absolute inset-x-0 bottom-1 h-3 bg-blue-200 opacity-40 -z-0" />
+              
             </span>
           </h1>
 
