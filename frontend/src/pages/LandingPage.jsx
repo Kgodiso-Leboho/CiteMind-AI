@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, BookOpen, CheckCircle2, Lock, Zap, Shield } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Sparkles, BookOpen, CheckCircle2, Lock, Zap, Shield, Search, User, LogIn } from 'lucide-react'
 
 export default function LandingPage() {
   const [scrollY, setScrollY] = useState(0)
@@ -12,114 +12,143 @@ export default function LandingPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 overflow-x-hidden">
+    <div className="min-h-screen bg-[#FDFDFD] text-slate-900 font-sans selection:bg-blue-100">
+      
+      {/* DOT GRID BACKGROUND */}
+      <div className="fixed inset-0 z-0 opacity-[0.4] pointer-events-none" 
+           style={{ backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 0)', backgroundSize: '24px 24px' }}>
+      </div>
+
       {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-              <BookOpen size={16} className="text-white" strokeWidth={2} />
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/40 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
+              <BookOpen size={14} className="text-white" />
             </div>
-            <span className="font-serif text-lg font-semibold tracking-tight">
-              CiteMind<span className="text-blue-600">AI</span>
-            </span>
+            <span className="font-bold text-lg tracking-tight text-blue-600">CiteMindAI</span>
           </div>
 
-          <div className="flex items-center gap-4">
-            <Link
-              to="/login"
-              className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/register"
-              className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white
-                         px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-150
-                         active:scale-95"
-            >
-              Get Started
-              <ArrowRight size={14} strokeWidth={2.5} />
-            </Link>
+          <div className="hidden md:flex items-center gap-8 text-[13px] font-medium text-slate-600">
+            <a href="#" className="text-blue-600">Home</a>
+            <a href="#" className="hover:text-blue-700 transition-colors">Features</a>
+            <a href="#" className="hover:text-blue-700 transition-colors">Testimonial</a>
+            <a href="#" className="hover:text-blue-700 transition-colors">Blogs</a>
+            <a href="#" className="hover:text-blue-700 transition-colors">About Us</a>
           </div>
+
+          <Link to="/register" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-full text-xs font-bold flex items-center gap-2 transition-all shadow-lg shadow-blue-900/10">
+            Start for free <ArrowUpRight size={14} />
+          </Link>
         </div>
       </nav>
 
-      {/* HERO */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-        {/* Animated background element */}
-        <div
-          className="absolute top-20 right-10 w-96 h-96 bg-blue-100 rounded-full opacity-20 blur-3xl pointer-events-none"
-          style={{
-            transform: `translateY(${scrollY * 0.15}px)`,
-            transition: 'transform 0.1s ease-out',
-          }}
-        />
-
-        <div className="relative max-w-3xl mx-auto text-center z-10">
+      {/* HERO SECTION */}
+      <section className="relative pt-40 pb-32 px-6 z-10 overflow-hidden">
+        <div className="max-w-7xl mx-auto text-center">
+          
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200
-                          rounded-full px-4 py-2 mb-8">
-            <Zap size={14} className="text-blue-600" />
-            <span className="text-xs font-medium text-blue-700">
-              Evidence-based research, AI-powered
+          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 rounded-full px-4 py-1.5 mb-8 shadow-sm">
+            <Sparkles size={12} className="text-blue-600" />
+            <span className="text-[10px] font-bold uppercase tracking-wider text-blue-800">
+              Welcome To CiteMind AI
             </span>
           </div>
 
-          {/* Main headline */}
-          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-semibold
-                         leading-tight tracking-tight mb-6 text-gray-900">
-            Research that{' '}
-            <span className="relative inline-block">
-              <span className="relative z-10">proves itself</span>
-              
-            </span>
-          </h1>
+          <h4 className="text-3xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.1] mb-8 text-blue-900">
+            Verify Every Claim. <br />
+            <span className="text-slate-300">Understand Every Data Point.</span>
+          </h4>
 
-          {/* Subtitle */}
-          <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-10 max-w-2xl mx-auto font-light">
-            CiteAI delivers rigorous, evidence-backed answers with structured citations.
-            No hallucinations. No guessing. Just verifiable research.
+          <p className="text-sm md:text-base text-slate-500 max-w-xl mx-auto mb-10 leading-relaxed font-light">
+            CiteMind AI accelerates your academic journey with advanced verification, 
+            synthesis, and structured citations from trusted sources.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Link
-              to="/register"
-              className="flex items-center justify-center gap-2.5 bg-blue-600 hover:bg-blue-700
-                         text-white px-8 py-4 rounded-xl text-base font-medium
-                         transition-all duration-150 active:scale-95 shadow-sm hover:shadow-md"
-            >
-              Start Free
-              <ArrowRight size={16} strokeWidth={2} />
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20">
+            <Link to="/register" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-bold flex items-center gap-2 transition-transform active:scale-95 shadow-lg shadow-blue-600/20">
+              Start for free <ArrowUpRight size={18} />
             </Link>
-            <button
-              onClick={() => document.getElementById('features').scrollIntoView({ behavior: 'smooth' })}
-              className="flex items-center justify-center gap-2.5 border border-gray-300
-                         hover:border-gray-400 text-gray-700 px-8 py-4 rounded-xl text-base font-medium
-                         transition-all duration-150 bg-white hover:bg-gray-50"
-            >
-              See How It Works
+            <button className="text-[13px] font-bold text-slate-500 hover:text-blue-600 transition-colors">
+              Explore Features
             </button>
           </div>
 
-          {/* Trust badge */}
-          <div className="flex items-center justify-center gap-6 text-sm text-gray-600 pt-8
-                          border-t border-gray-200">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 size={16} className="text-green-600" strokeWidth={2} />
-              <span>Academic grade accuracy</span>
+          {/* Integration Strip */}
+          <div className="mb-12">
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-6">Integrated with:</p>
+            <div className="flex flex-wrap justify-center gap-6 items-center opacity-70 grayscale">
+              <div className="p-3 bg-white border border-slate-100 rounded-xl shadow-sm hover:grayscale-0 transition-all cursor-pointer">
+                <span className="font-serif font-black text-xs italic">nature</span>
+              </div>
+              <div className="p-3 bg-white border border-slate-100 rounded-xl shadow-sm hover:grayscale-0 transition-all cursor-pointer">
+                 <span className="font-bold text-xs">PubMed</span>
+              </div>
+              <div className="p-3 bg-white border border-slate-100 rounded-xl shadow-sm hover:grayscale-0 transition-all cursor-pointer px-4">
+                <span className="font-serif font-bold text-xs italic">arXiv</span>
+              </div>
             </div>
-            <div className="hidden sm:flex items-center gap-2">
-              <Lock size={16} className="text-green-600" strokeWidth={2} />
-              <span>No data leakage</span>
+          </div>
+
+          {/* Floating Cards (Tilted Icons) - Updated to blue theme */}
+          {/* Left Tilted Card */}
+          <div 
+            className="hidden lg:block absolute left-[8%] top-[45%] w-64 h-80 bg-white border border-slate-100 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] overflow-hidden transition-transform duration-700 hover:scale-105"
+            style={{ transform: `rotate(-12deg) translateY(${scrollY * -0.05}px)` }}
+          >
+            <div className="h-2/3 bg-blue-50 flex items-center justify-center grayscale">
+               <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400" alt="Library" className="object-cover h-full w-full" />
+            </div>
+            <div className="p-5 text-left">
+              <p className="text-[11px] font-bold text-blue-700 leading-tight">1. Structured Lit Reviews: Curated bibliographies.</p>
+            </div>
+          </div>
+
+          {/* Right Tilted Card - Blue themed */}
+          <div 
+            className="hidden lg:block absolute right-[8%] top-[35%] w-72 h-96 bg-blue-700 rounded-[2.5rem] shadow-2xl overflow-hidden transition-transform duration-700 hover:scale-105"
+            style={{ transform: `rotate(8deg) translateY(${scrollY * -0.08}px)` }}
+          >
+            <div className="h-3/4 p-4">
+               <div className="w-full h-full bg-white/10 rounded-2xl border border-white/20 backdrop-blur-md flex flex-col p-4">
+                  <div className="w-8 h-1.5 bg-white/20 rounded-full mb-2" />
+                  <div className="w-12 h-1.5 bg-white/20 rounded-full mb-6" />
+                  <div className="space-y-3">
+                    <div className="h-2 w-full bg-white/5 rounded-full" />
+                    <div className="h-2 w-full bg-white/5 rounded-full" />
+                    <div className="h-2 w-3/4 bg-white/5 rounded-full" />
+                  </div>
+               </div>
+            </div>
+            <div className="p-6 text-left text-white">
+              <p className="text-[12px] font-medium leading-relaxed opacity-90">2. Verifiable Insights: Trace every fact back to source.</p>
             </div>
           </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <div className="flex flex-col items-center gap-2 mt-20 opacity-40">
+           <div className="w-5 h-8 border-2 border-blue-600 rounded-full flex justify-center p-1">
+              <div className="w-1 h-1.5 bg-blue-600 rounded-full animate-bounce" />
+           </div>
+           <span className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Scroll Down</span>
+        </div>
       </section>
 
-      {/* PROBLEM & SOLUTION */}
-      <section className="py-20 px-6 bg-gray-50">
+      {/* REMAINDER OF SECTIONS */}
+      <section className="py-24 px-6 bg-white relative z-10 border-t border-slate-50">
+          <div className="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-10 opacity-20 grayscale grayscale-[50%] contrast-125">
+              <span className="font-black italic text-xl">SYNKRON</span>
+              <span className="font-black italic text-xl">DATAMATH</span>
+              <span className="font-black italic text-xl">BIOME DATA</span>
+              <span className="font-black italic text-xl">LOGOS</span>
+              <span className="font-black italic text-xl">AETHER PULSE</span>
+          </div>
+      </section>
+
+      {/* PROBLEM & SOLUTION - Updated to blue */}
+      <section className="py-20 px-6 bg-slate-50">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left: Problem */}
@@ -127,7 +156,7 @@ export default function LandingPage() {
               <p className="text-sm font-medium text-blue-600 mb-3 uppercase tracking-wide">
                 The Research Problem
               </p>
-              <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-6 leading-tight">
+              <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-6 leading-tight text-slate-900">
                 Standard AI assistants sound confident. But where's the proof?
               </h2>
               <ul className="space-y-3 mb-8">
@@ -150,10 +179,10 @@ export default function LandingPage() {
 
             {/* Right: Solution */}
             <div>
-              <p className="text-sm font-medium text-green-600 mb-3 uppercase tracking-wide">
-                The CiteAI Approach
+              <p className="text-sm font-medium text-blue-600 mb-3 uppercase tracking-wide">
+                The CiteMindAI Approach
               </p>
-              <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-6 leading-tight">
+              <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-6 leading-tight text-slate-900">
                 Every answer comes with proof.
               </h2>
               <ul className="space-y-3 mb-8">
@@ -164,7 +193,7 @@ export default function LandingPage() {
                   'Transparent sources',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-gray-700">
-                    <span className="text-green-500 mt-0.5 font-bold">✓</span>
+                    <span className="text-blue-500 mt-0.5 font-bold">✓</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -177,18 +206,18 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FEATURES */}
+      {/* FEATURES - Updated to blue */}
       <section id="features" className="py-24 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-sm font-medium text-blue-600 mb-3 uppercase tracking-wide">
               Built for Serious Research
             </p>
-            <h2 className="font-serif text-4xl md:text-5xl font-semibold mb-4 leading-tight">
+            <h2 className="font-serif text-4xl md:text-5xl font-semibold mb-4 leading-tight text-slate-900">
               Everything you need for credible research
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              CiteAI combines advanced AI with academic standards to deliver research that holds up.
+              CiteMindAI combines advanced AI with academic standards to deliver research that holds up.
             </p>
           </div>
 
@@ -247,14 +276,14 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* USE CASES */}
-      <section className="py-20 px-6 bg-gray-50">
+      {/* USE CASES - Updated to blue */}
+      <section className="py-20 px-6 bg-slate-50">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-sm font-medium text-blue-600 mb-3 uppercase tracking-wide">
-              Who Uses CiteAI
+              Who Uses CiteMindAI
             </p>
-            <h2 className="font-serif text-4xl font-semibold">
+            <h2 className="font-serif text-4xl font-semibold text-slate-900">
               Research, reimagined
             </h2>
           </div>
@@ -276,9 +305,9 @@ export default function LandingPage() {
             ].map((item, i) => (
               <div
                 key={i}
-                className="p-6 rounded-xl border border-gray-200 bg-white"
+                className="p-6 rounded-xl border border-gray-200 bg-white hover:border-blue-200 hover:shadow-md transition-all"
               >
-                <h3 className="font-serif text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="font-serif text-lg font-semibold text-blue-700 mb-2">
                   {item.role}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
@@ -288,16 +317,14 @@ export default function LandingPage() {
         </div>
       </section>
 
-
-
-      {/* FINAL CTA */}
-      <section className="py-20 px-6 bg-gradient-to-b from-gray-50 to-white">
+      {/* FINAL CTA - Updated to blue */}
+      <section className="py-20 px-6 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-serif text-4xl md:text-5xl font-semibold mb-6 text-gray-900">
+          <h2 className="font-serif text-4xl md:text-5xl font-semibold mb-6 text-blue-900">
             Transform your research process
           </h2>
           <p className="text-lg text-gray-600 mb-8">
-            Join researchers, journalists, and academics using CiteAI to deliver credible, verifiable, world-class research.
+            Join researchers, journalists, and academics using CiteMindAI to deliver credible, verifiable, world-class research.
           </p>
           <Link
             to="/register"
@@ -314,7 +341,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* FOOTER - Updated to blue */}
       <footer className="border-t border-gray-200 py-12 px-6 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="grid sm:grid-cols-4 gap-8 mb-8">
@@ -323,38 +350,38 @@ export default function LandingPage() {
                 <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center flex-shrink-0">
                   <BookOpen size={14} className="text-white" strokeWidth={2} />
                 </div>
-                <span className="font-serif font-semibold">CiteAI</span>
+                <span className="font-serif font-semibold text-blue-700">CiteMindAI</span>
               </div>
               <p className="text-xs text-gray-500">Evidence-backed research AI.</p>
             </div>
             <div>
               <h4 className="font-semibold text-sm mb-3 text-gray-900">Product</h4>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li><a href="#" className="hover:text-gray-900 transition">Features</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition">Pricing</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition">API Docs</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition">Features</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition">Pricing</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition">API Docs</a></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold text-sm mb-3 text-gray-900">Company</h4>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li><a href="#" className="hover:text-gray-900 transition">About</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition">Blog</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition">Contact</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition">About</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition">Blog</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition">Contact</a></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold text-sm mb-3 text-gray-900">Legal</h4>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li><a href="#" className="hover:text-gray-900 transition">Privacy</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition">Terms</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition">Security</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition">Privacy</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition">Terms</a></li>
+                <li><a href="#" className="hover:text-blue-600 transition">Security</a></li>
               </ul>
             </div>
           </div>
           <div className="border-t border-gray-200 pt-8">
             <p className="text-center text-xs text-gray-500">
-              © 2024 CiteAI. All rights reserved. Built with rigor.
+              © 2024 CiteMindAI. All rights reserved. Built with rigor.
             </p>
           </div>
         </div>
